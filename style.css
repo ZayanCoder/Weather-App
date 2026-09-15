@@ -1,0 +1,424 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  min-height: 100vh;
+  padding: 120px 20px 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+  color: white;
+
+  background:
+    radial-gradient(circle at 20% 20%, #2563eb55, transparent 30%),
+    radial-gradient(circle at 80% 80%, #06b6d455, transparent 30%),
+    linear-gradient(135deg, #020617, #0f172a, #111827);
+
+  background-size: 200% 200%;
+  animation: backgroundMove 10s ease-in-out infinite alternate;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== BACKGROUND ANIMATION ===== */
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* ===== HEADING ===== */
+h1 {
+  margin-bottom: 30px;
+
+  font-size: 42px;
+  letter-spacing: 2px;
+  text-align: center;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #38bdf8,
+    #22d3ee
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    filter: drop-shadow(0 0 5px #38bdf855);
+  }
+
+  to {
+    filter: drop-shadow(0 0 25px #38bdf8aa);
+  }
+}
+
+/* ===== FORM ===== */
+form {
+  position: relative;
+  z-index: 2;
+
+  width: 420px;
+  padding: 35px;
+
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  border: 1px solid #ffffff22;
+  border-radius: 24px;
+
+  background: #ffffff0d;
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 25px 80px #00000066,
+    inset 0 1px 1px #ffffff22;
+
+  animation: cardEnter 0.8s ease-out;
+
+  transition: 0.4s ease;
+}
+
+form:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 35px 100px #00000088,
+    0 0 40px #38bdf822,
+    inset 0 1px 1px #ffffff33;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== INPUT ===== */
+input {
+  width: 260px;
+
+  padding: 15px 18px;
+
+  border: 1px solid #ffffff22;
+  border-radius: 12px;
+
+  outline: none;
+
+  color: white;
+  background: #020617aa;
+
+  font-size: 16px;
+
+  transition: 0.3s ease;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus {
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 0 3px #38bdf822,
+    0 0 25px #38bdf844;
+
+  transform: scale(1.03);
+}
+
+/* ===== BUTTON ===== */
+button {
+  position: relative;
+  overflow: hidden;
+
+  padding: 15px 25px;
+
+  border: none;
+  border-radius: 12px;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #06b6d4
+  );
+
+  box-shadow: 0 8px 25px #06b6d444;
+
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.04);
+
+  box-shadow:
+    0 12px 35px #06b6d466,
+    0 0 25px #38bdf844;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Button Shine */
+button::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 60%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffffff66,
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  40% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+/* ===== WEATHER RESULTS ===== */
+#show-weather,
+#show-humidity,
+#show-feeling,
+#show-wind,
+#show-country,
+#show-province,
+#show-city {
+  position: relative;
+  z-index: 2;
+
+  width: 420px;
+
+  padding: 14px 20px;
+
+  border: 1px solid #ffffff18;
+  border-radius: 14px;
+
+  background: #ffffff0b;
+  backdrop-filter: blur(12px);
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px #00000033;
+}
+
+/* ===== TEMPERATURE ===== */
+#show-weather {
+  margin-top: 25px;
+
+  font-size: 42px;
+  font-weight: bold;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #38bdf8
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: temperaturePop 0.7s ease-out;
+}
+
+@keyframes temperaturePop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  70% {
+    transform: scale(1.15);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== OTHER WEATHER DATA ===== */
+#show-humidity {
+  margin-top: 12px;
+
+  font-size: 20px;
+  color: #cbd5e1;
+
+  animation: resultSlide 0.5s ease-out;
+}
+
+#show-feeling,
+#show-wind,
+#show-country,
+#show-province,
+#show-city {
+  margin-top: 10px;
+
+  font-size: 18px;
+  color: #e2e8f0;
+
+  animation: resultSlide 0.6s ease-out;
+}
+
+@keyframes resultSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== FLOATING LIGHTS ===== */
+body::before,
+body::after {
+  content: "";
+
+  position: fixed;
+
+  width: 250px;
+  height: 250px;
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  opacity: 0.25;
+
+  pointer-events: none;
+
+  animation: floatingLight 8s ease-in-out infinite alternate;
+}
+
+body::before {
+  top: -100px;
+  left: -100px;
+
+  background: #2563eb;
+}
+
+body::after {
+  right: -100px;
+  bottom: -100px;
+
+  background: #06b6d4;
+
+  animation-delay: 2s;
+}
+
+@keyframes floatingLight {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(100px, 60px) scale(1.3);
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 500px) {
+
+  body {
+    padding-top: 80px;
+    padding-bottom: 30px;
+  }
+
+  h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+
+  form {
+    width: 90%;
+    padding: 25px;
+
+    flex-direction: column;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  #show-weather,
+  #show-humidity,
+  #show-feeling,
+  #show-wind,
+  #show-country,
+  #show-province,
+  #show-city {
+    width: 90%;
+  }
+
+  #show-weather {
+    font-size: 34px;
+  }
+
+  #show-humidity,
+  #show-feeling,
+  #show-wind,
+  #show-country,
+  #show-province,
+  #show-city {
+    font-size: 16px;
+  }
+} 

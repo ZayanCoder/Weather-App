@@ -6,18 +6,31 @@ const country = document.querySelector("#show-country");
 const province = document.querySelector("#show-province");
 const cityName = document.querySelector("#show-city");
 
+const icon = document.querySelector("#show-icon");
+const errorMessage = document.querySelector("#show-error");
+
 async function getWeather(event) {
   event.preventDefault();
 
   const city = document.querySelector("#city-input").value;
-  const button = document.querySelector("button");
-   try {
+
+
+  if (city === "") {
+    errorMessage.innerHTML = "Please enter a city name";
+    return;
+  }
+
+  
+  errorMessage.innerHTML = "";
+
+  try {
     const response = await axios(
       `https://api.weatherapi.com/v1/current.json?key=60e0a3d2f152486e950213038260606&q=${city}`
     );
 
     console.log(response.data);
 
+    
     para.innerHTML =
       "Temperature: " + response.data.current.temp_c + "°C";
 
@@ -39,9 +52,17 @@ async function getWeather(event) {
     cityName.innerHTML =
       "City: " + response.data.location.name;
 
+
+    
+    if (response.data.current.is_day === 1) {
+      icon.innerHTML = "☀️";
+    } else {
+      icon.innerHTML = "🌙";
+    }
+
   } catch (error) {
     console.log(error);
 
-    para.innerHTML = "Weather not found";
+    errorMessage.innerHTML = "❌ City not found. Please enter a valid city.";
   }
-  }
+}
